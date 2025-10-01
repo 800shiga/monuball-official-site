@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>モニュボール競技連盟公式サイト</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    label { display: block; margin-top: 10px; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+    .number-display { margin-top: 30px; font-size: 24px; font-weight: bold; color: blue; }
+  </style>
+</head>
+<body>
+  <h1>会員登録フォーム</h1>
+
+  <form id="registrationForm">
+    <label>日本語姓名
+      <input type="text" id="nameJp" required placeholder="山田 太郎">
+    </label>
+    <label>英語姓名
+      <input type="text" id="nameEn" required placeholder="YAMADA Taro">
+    </label>
+    <label>所属
+      <input type="text" id="affiliation" placeholder="所属を入力">
+    </label>
+    <button type="submit">登録完了</button>
+  </form>
+
+  <div class="number-display" id="numberDisplay" style="display:none;">
+    あなたの番号は <span id="memberNumber"></span><br>
+    スクリーンショットしておくことをおすすめします
+  </div>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const display = document.getElementById('numberDisplay');
+    const memberNumber = document.getElementById('memberNumber');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      // 0000～9999 のランダム4桁番号生成
+      const number = Math.floor(1000 + Math.random() * 9000);
+      memberNumber.textContent = number;
+      display.style.display = 'block';
+      form.style.display = 'none'; // フォームを非表示に
+    });
+  </script>
+</body>
+</html>
