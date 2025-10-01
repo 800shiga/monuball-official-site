@@ -26,27 +26,30 @@
   </div>
 
   <script>
-    // 仮の会員データ（実際はFirebaseから取得）
-    const member = {
-      number: 1234,
-      nameJp: '山田 太郎',
-      nameEn: 'YAMADA Taro',
-      affiliation: '彦根東',
-      bio: '自己紹介を入力してください'
-    };
+// URLから番号を取得
+const urlParams = new URLSearchParams(window.location.search);
+const numberParam = parseInt(urlParams.get('number'));
 
-    // 表示
-    document.getElementById('number').textContent = member.number;
-    document.getElementById('nameJp').textContent = member.nameJp;
-    document.getElementById('nameEn').textContent = member.nameEn;
-    document.getElementById('affiliation').textContent = member.affiliation;
-    document.getElementById('bio').value = member.bio;
+// 仮データ（本来はFirebaseで検索）
+const members = [
+  {number: 1234, nameJp: '山田 太郎', nameEn: 'YAMADA Taro', affiliation: '彦根東', bio: '自己紹介を入力してください'},
+  {number: 2345, nameJp: '佐藤 花子', nameEn: 'SATO Hanako', affiliation: '彦根東', bio: '自己紹介を入力してください'}
+];
 
-    // 保存ボタン
-    document.getElementById('saveBio').addEventListener('click', () => {
-      member.bio = document.getElementById('bio').value;
-      alert('自己紹介を保存しました！（Firebase連携可能）');
-    });
+// 該当番号の会員を取得
+const member = members.find(m => m.number === numberParam);
+
+// 表示
+if(member){
+  document.getElementById('number').textContent = member.number;
+  document.getElementById('nameJp').textContent = member.nameJp;
+  document.getElementById('nameEn').textContent = member.nameEn;
+  document.getElementById('affiliation').textContent = member.affiliation;
+  document.getElementById('bio').value = member.bio;
+}else{
+  document.getElementById('memberInfo').innerHTML = '<p>会員が見つかりません</p>';
+}
+
   </script>
 </body>
 </html>
