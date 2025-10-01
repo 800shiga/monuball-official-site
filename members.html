@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会員リスト</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <h1>会員リスト</h1>
+  <table id="membersTable">
+    <thead>
+      <tr>
+        <th>番号</th>
+        <th>日本語姓名</th>
+        <th>英語姓名</th>
+        <th>所属</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 会員データをここに表示 -->
+    </tbody>
+  </table>
+
+  <script>
+    // サンプルデータ（後でFirebaseと連携して実データに置き換え）
+    const members = [
+      {number: 1234, nameJp: '山田 太郎', nameEn: 'YAMADA Taro', affiliation: '彦根東'},
+      {number: 2345, nameJp: '佐藤 花子', nameEn: 'SATO Hanako', affiliation: '彦根東'}
+    ];
+
+    const tbody = document.querySelector('#membersTable tbody');
+
+    // 番号順にソートして表示
+    members.sort((a,b) => a.number - b.number).forEach(m => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${m.number}</td><td>${m.nameJp}</td><td>${m.nameEn}</td><td>${m.affiliation}</td>`;
+      tbody.appendChild(tr);
+    });
+  </script>
+</body>
+</html>
